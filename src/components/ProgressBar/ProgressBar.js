@@ -28,31 +28,38 @@ const SIZES = {
   },
 };
 
+const WIDTH = 370;
+
 const ProgressBar = ({ value, size }) => {
   const styles = SIZES[size];
 
+  const padding = parseInt(styles['--padding']) || 0;
+  const innerWidth = (value / 100) * (WIDTH - 2 * padding);
+
   return (
-    <Wrapper style={styles} role="progressbar" aria-valuenow={value}>
-      <Bar style={styles} value={value} />
-    </Wrapper>
+    <OuterBar
+      style={styles}
+      width={WIDTH}
+      role="progressbar"
+      aria-valuenow={value}
+    >
+      <InnerBar style={styles} width={innerWidth} />
+    </OuterBar>
   );
 };
 
-const Base = styled.span`
-  display: inline-block;
-  width: 370px;
-`;
-
-const Wrapper = styled(Base)`
+const OuterBar = styled.div`
+  width: ${(props) => props.width}px;
   height: calc(var(--height) + 2 * var(--padding));
   padding: var(--padding);
   border-radius: var(--outer-radius);
   background-color: ${COLORS.transparentGray15};
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
+  overflow: hidden;
 `;
 
-const Bar = styled(Base)`
-  width: ${(prop) => (prop.value * 370) / 100}px;
+const InnerBar = styled.div`
+  width: ${(props) => props.width}px;
   height: var(--height);
   border-top-left-radius: var(--inner-radius);
   border-bottom-left-radius: var(--inner-radius);
