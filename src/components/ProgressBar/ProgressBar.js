@@ -28,29 +28,24 @@ const SIZES = {
   },
 };
 
-const WIDTH = 370;
-
 const ProgressBar = ({ value, size }) => {
-  const styles = SIZES[size];
-
-  const padding = parseInt(styles['--padding']) || 0;
-  const innerWidth = (value / 100) * (WIDTH - 2 * padding);
+  const styles = { ...SIZES[size], '--width': `${value}%` };
 
   return (
     <OuterBar
       style={styles}
-      width={WIDTH}
       role="progressbar"
       aria-valuenow={value}
+      aria-valuemin="0"
+      aria-valuemax="100"
     >
-      <InnerBar style={styles} width={innerWidth} />
+      <VisuallyHidden>{value}%</VisuallyHidden>
+      <InnerBar style={styles} />
     </OuterBar>
   );
 };
 
 const OuterBar = styled.div`
-  width: ${(props) => props.width}px;
-  height: calc(var(--height) + 2 * var(--padding));
   padding: var(--padding);
   border-radius: var(--outer-radius);
   background-color: ${COLORS.transparentGray15};
@@ -59,7 +54,7 @@ const OuterBar = styled.div`
 `;
 
 const InnerBar = styled.div`
-  width: ${(props) => props.width}px;
+  width: var(--width);
   height: var(--height);
   border-top-left-radius: var(--inner-radius);
   border-bottom-left-radius: var(--inner-radius);
