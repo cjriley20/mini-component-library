@@ -40,7 +40,9 @@ const ProgressBar = ({ value, size }) => {
       aria-valuemax="100"
     >
       <VisuallyHidden>{value}%</VisuallyHidden>
-      <InnerBar style={styles} />
+      <InnerBarWrapper>
+        <InnerBar style={styles} />
+      </InnerBarWrapper>
     </OuterBar>
   );
 };
@@ -50,6 +52,11 @@ const OuterBar = styled.div`
   border-radius: var(--outer-radius);
   background-color: ${COLORS.transparentGray15};
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
+  overflow: hidden;
+`;
+
+const InnerBarWrapper = styled.div`
+  border-radius: 4px;
   overflow: hidden;
 `;
 
