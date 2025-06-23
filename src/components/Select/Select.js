@@ -8,13 +8,20 @@ import { getDisplayedValue } from './Select.helpers';
 const Select = ({ label, value, onChange, children }) => {
   const displayedValue = getDisplayedValue(value, children);
 
+  const [isFocused, setIsFocused] = React.useState(false);
+
   return (
-    <VisibleSelect>
+    <VisibleSelect isFocused={isFocused}>
       <Text>{displayedValue}</Text>
       <IconWrapper>
-        <Icon id="chevron-down" size="20" strokeWidth="2" />
+        <Icon id="chevron-down" size="24" strokeWidth="1" />
       </IconWrapper>
-      <HiddenSelect value={value} onChange={onChange}>
+      <HiddenSelect
+        value={value}
+        onChange={onChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      >
         {children}
       </HiddenSelect>
     </VisibleSelect>
@@ -38,10 +45,8 @@ const VisibleSelect = styled.div`
   border-radius: 8px;
   width: fit-content;
   color: ${COLORS.gray700};
-
-  &:focus {
-    outline: 2px solid ${COLORS.primary};
-  }
+  outline: ${({ isFocused }) =>
+    isFocused ? `2px solid ${COLORS.primary}` : 'none'};
 
   &:hover {
     color: ${COLORS.black};
