@@ -5,25 +5,20 @@ import styled from 'styled-components';
 import { COLORS } from '../../constants';
 import VisuallyHidden from '../VisuallyHidden';
 
-const pxToRem = (px, base = 16) => `${px / base}rem`;
-
 const SIZES = {
   small: {
-    '--height': pxToRem(8),
-    '--outer-radius': '4px',
-    '--inner-radius': '4px',
+    '--height': '8px',
+    '--radius': '4px',
     '--padding': '0px',
   },
   medium: {
-    '--height': pxToRem(12),
-    '--outer-radius': '4px',
-    '--inner-radius': '4px',
+    '--height': '12px',
+    '--radius': '4px',
     '--padding': '0px',
   },
   large: {
-    '--height': pxToRem(16),
-    '--outer-radius': '8px',
-    '--inner-radius': '4px',
+    '--height': '16px',
+    '--radius': '8px',
     '--padding': '4px',
   },
 };
@@ -49,7 +44,7 @@ const ProgressBar = ({ value, size }) => {
 
 const OuterBar = styled.div`
   padding: var(--padding);
-  border-radius: var(--outer-radius);
+  border-radius: var(--radius);
   background-color: ${COLORS.transparentGray15};
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
   overflow: hidden;
@@ -63,8 +58,8 @@ const InnerBarWrapper = styled.div`
 const InnerBar = styled.div`
   width: var(--width);
   height: var(--height);
-  border-top-left-radius: var(--inner-radius);
-  border-bottom-left-radius: var(--inner-radius);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   background-color: ${COLORS.primary};
 `;
 
