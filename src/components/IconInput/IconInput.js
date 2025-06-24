@@ -6,12 +6,14 @@ import { COLORS } from '../../constants';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 
+const pxToRem = (px, base = 16) => `${px / base}rem`;
+
 const SIZES = {
   small: {
     'icon-size': '16',
     'stroke-width': '1',
-    '--font-size': `${14 / 16}rem`,
-    '--height': '24px',
+    '--font-size': pxToRem(14),
+    '--height': pxToRem(24),
     '--padding-left': '24px',
     '--padding': '4px',
     '--border-width': '1px',
@@ -19,8 +21,8 @@ const SIZES = {
   large: {
     'icon-size': '24',
     'stroke-width': '2',
-    '--font-size': `${18 / 16}rem`,
-    '--height': '36px',
+    '--font-size': pxToRem(18),
+    '--height': pxToRem(36),
     '--padding-left': '36px',
     '--padding': '8px',
     '--border-width': '2px',
