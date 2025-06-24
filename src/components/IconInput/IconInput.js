@@ -9,6 +9,7 @@ import VisuallyHidden from '../VisuallyHidden';
 const STYLES = {
   small: {
     'icon-size': '16',
+    'stroke-width': '1',
     '--font-size': `${14 / 16}rem`,
     '--height': '24px',
     '--padding-left': '24px',
@@ -17,6 +18,7 @@ const STYLES = {
   },
   large: {
     'icon-size': '24',
+    'stroke-width': '2',
     '--font-size': `${18 / 16}rem`,
     '--height': '36px',
     '--padding-left': '36px',
@@ -31,7 +33,11 @@ const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
   return (
     <Wrapper>
       <IconWrapper>
-        <Icon id={icon} size={styles['icon-size']} strokeWidth="1" />
+        <Icon
+          id={icon}
+          size={styles['icon-size']}
+          strokeWidth={styles['stroke-width']}
+        />
       </IconWrapper>
       <TextInput style={styles} {...delegated}></TextInput>
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -39,14 +45,10 @@ const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
   );
 };
 
-const Wrapper = styled.div`
-  position: relative;
-`;
-
 const TextInput = styled.input`
   font-size: var(--font-size);
-  color: ${COLORS.gray700};
   font-weight: 700;
+  color: ${COLORS.gray700};
   border: none;
   border-bottom: var(--border-width) solid ${COLORS.black};
   padding: var(--padding) 0px;
@@ -66,6 +68,18 @@ const IconWrapper = styled.div`
   left: 0;
   transform: translateY(-50%);
   color: ${COLORS.gray700};
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+
+  &:hover ${IconWrapper} {
+    color: ${COLORS.black};
+  }
+
+  &:hover ${TextInput} {
+    color: ${COLORS.black};
+  }
 `;
 
 export default IconInput;
