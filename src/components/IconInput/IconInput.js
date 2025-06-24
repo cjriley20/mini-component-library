@@ -6,7 +6,7 @@ import { COLORS } from '../../constants';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 
-const STYLES = {
+const SIZES = {
   small: {
     'icon-size': '16',
     'stroke-width': '1',
@@ -28,7 +28,7 @@ const STYLES = {
 };
 
 const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
-  const styles = { ...STYLES[size], '--width': `${width}px` };
+  const styles = { ...SIZES[size], '--width': `${width}px` };
 
   return (
     <Wrapper>
