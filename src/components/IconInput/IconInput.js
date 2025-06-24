@@ -6,13 +6,34 @@ import { COLORS } from '../../constants';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 
+const STYLES = {
+  small: {
+    'icon-size': '16',
+    '--font-size': `${14 / 16}rem`,
+    '--height': '24px',
+    '--padding-left': '24px',
+    '--padding': '4px',
+    '--border-width': '1px',
+  },
+  large: {
+    'icon-size': '24',
+    '--font-size': `${18 / 16}rem`,
+    '--height': '36px',
+    '--padding-left': '36px',
+    '--padding': '8px',
+    '--border-width': '2px',
+  },
+};
+
 const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
+  const styles = { ...STYLES[size], '--width': `${width}px` };
+
   return (
     <Wrapper>
       <IconWrapper>
-        <Icon id={icon} size="16" strokeWidth="1" />
+        <Icon id={icon} size={styles['icon-size']} strokeWidth="1" />
       </IconWrapper>
-      <TextInput width={width} {...delegated}></TextInput>
+      <TextInput style={styles} {...delegated}></TextInput>
       <VisuallyHidden>{label}</VisuallyHidden>
     </Wrapper>
   );
@@ -23,15 +44,15 @@ const Wrapper = styled.div`
 `;
 
 const TextInput = styled.input`
-  font-size: ${14 / 16}rem;
+  font-size: var(--font-size);
   color: ${COLORS.gray700};
   font-weight: 700;
   border: none;
-  border-bottom: 1px solid ${COLORS.black};
-  padding: 4px 0px;
-  padding-left: 24px;
-  width: ${(props) => props.width}px;
-  height: 24px;
+  border-bottom: var(--border-width) solid ${COLORS.black};
+  padding: var(--padding) 0px;
+  padding-left: var(--padding-left);
+  width: var(--width);
+  height: var(--height);
 
   &::placeholder {
     color: ${COLORS.gray500};
@@ -41,8 +62,9 @@ const TextInput = styled.input`
 
 const IconWrapper = styled.div`
   position: absolute;
-  top: 4px;
+  top: 50%;
   left: 0;
+  transform: translateY(-50%);
   color: ${COLORS.gray700};
 `;
 
