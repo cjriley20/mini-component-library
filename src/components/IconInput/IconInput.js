@@ -55,6 +55,8 @@ const TextInput = styled.input`
   padding-left: var(--padding-left);
   width: var(--width);
   height: var(--height);
+  outline-offset: 2px;
+  outline-color: ${COLORS.primary};
 
   &::placeholder {
     color: ${COLORS.gray500};
