@@ -50,7 +50,7 @@ const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
 const TextInput = styled.input`
   font-size: var(--font-size);
   font-weight: 700;
-  color: ${COLORS.gray700};
+  color: inherit;
   border: none;
   border-bottom: var(--border-width) solid ${COLORS.black};
   padding: var(--padding) 0px;
@@ -71,17 +71,13 @@ const IconWrapper = styled.div`
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  color: ${COLORS.gray700};
 `;
 
 const Wrapper = styled.div`
   position: relative;
+  color: ${COLORS.gray700};
 
-  &:hover ${IconWrapper} {
-    color: ${COLORS.black};
-  }
-
-  &:hover ${TextInput} {
+  &:hover {
     color: ${COLORS.black};
   }
 `;
